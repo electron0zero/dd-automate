@@ -33,36 +33,9 @@ async function run() {
   await pageg.keyboard.press('Enter');  
 
   const page = await browser.newPage();
-  // await page.setViewport({width: 1024, height: 768});
-  // await page.goto('https://github.com/login', {waitUntil: 'networkidle2'});
-  // dom element selectors
-  // const USERNAME_SELECTOR = '#login_field';
-  // const PASSWORD_SELECTOR = '#password';
-  // await page.click(USERNAME_SELECTOR);
-  // await page.keyboard.type(CREDS.username);
-  // await page.click(PASSWORD_SELECTOR);
-  // await page.keyboard.type(CREDS.password);
-  // // Submit form
-  // await page.keyboard.press('Tab');  
-  // await page.keyboard.press('Enter');  
-  // await page.waitForNavigation();
-  // const userToSearch = 'john';
-  // const searchUrl = `https://github.com/search?q=${userToSearch}&type=Users&utf8=%E2%9C%93`;
-  // await page.goto(searchUrl);
   await page.waitFor(2*1000);
   await page.goto('https://nucleus.niituniversity.in/', {waitUntil: 'networkidle2'});
   await page.click('#lnklogingoogle', {waitUntil: 'networkidle2'});
-  // dom element selectors
-  // const USERNAME_SELECTOR = '#SchSel_txtUserName';
-  // const PASSWORD_SELECTOR = '#SchSel_txtPassword';
-  // await page.click(USERNAME_SELECTOR);
-  // await page.keyboard.type(CREDS.nu);
-  // await page.click(PASSWORD_SELECTOR);
-  // await page.keyboard.type(CREDS.pass);
-  // // Submit form
-  // await page.keyboard.press('Tab');  
-  // await page.keyboard.press('Enter');  
-  // await page.waitForNavigation();
   await page.waitFor(2*1000);
   await page.goto('https://nucleus.niituniversity.in/WebApp/StudParentDashBoard/DailyDiary.aspx', {waitUntil: 'networkidle2'});
   // await page.click('#ctl00_ContentPlaceHolder1_btnDDiary');
@@ -81,8 +54,12 @@ async function run() {
   await page.select('select[name="ctl00$ContentPlaceHolder1$Timeouthr"]', out_hour);
   await page.select('select[name="ctl00$ContentPlaceHolder1$Timeoutmin"]', out_min);
   // fill in the desc.
-  await page.type('#txtDesc', 'Hello World', {delay: 100}); // Types slower, like a user
+  await page.type('#txtDesc', 'Fixed a bug and worked on a feature', {delay: 10}); // Types slower, like a user
+  // click the submit buttom
+  await page.click('#ctl00_ContentPlaceHolder1_btnSubmit', {waitUntil: 'networkidle2'});
+  // get contenet of alert box
 
+  // take screenshot of page
   await page.screenshot({ path: 'screenshots/nu.png' });
 
 }
