@@ -33,6 +33,9 @@ async function run() {
   await pageg.keyboard.press('Enter');  
 
   const page = await browser.newPage();
+  page.on('dialog', async dialog => {
+    console.log(dialog.message());
+  });
   await page.waitFor(2*1000);
   await page.goto('https://nucleus.niituniversity.in/', {waitUntil: 'networkidle2'});
   await page.click('#lnklogingoogle', {waitUntil: 'networkidle2'});
