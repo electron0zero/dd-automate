@@ -89,6 +89,7 @@ function sendEmail(subject, message){
 
 // this function is resposnible for all puppetier things
 async function run() {
+  console.log("Started run() at: " + new Date().toString())
   // config browser
   const browser = await puppeteer.launch({
     headless: true,
@@ -158,6 +159,7 @@ async function run() {
   sendEmail("dd-automate - Daily Diary Email", message_for_email)
   // now close browser
   await browser.close();
+  console.log("run() Finished at: " + new Date().toString())
 }
 
 // ================================
