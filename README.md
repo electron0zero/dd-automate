@@ -28,9 +28,15 @@ you can change `headless: false` to see what GUI
 ### Deplyment
 
 #### Heroku
-1. do usual heroku things
+1. do usual heroku things, login, project create etc.
 2. add this [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) to install required dependcies for puppeteer
+3. add credit card(if not added) so we can add scheduler addon
 3. configure cron to run it daily at a time
+
+- `heroku create dd-automate`
+- `heroku buildpacks:add https://github.com/jontewks/puppeteer-heroku-buildpack`
+- `heroku addons:add scheduler`
+- `git push heroku master`
 
 ### Refer these for setup and other thing
 http://www.spacjer.com/blog/2014/02/10/defining-node-dot-js-task-for-heroku-scheduler/
