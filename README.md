@@ -23,6 +23,7 @@ module.exports = {
 
 ### How to run
 `node index.js`
+you can change `headless: false` to see what GUI 
 
 ### Refer these for setup and other things
 http://www.spacjer.com/blog/2014/02/10/defining-node-dot-js-task-for-heroku-scheduler/

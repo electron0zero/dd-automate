@@ -91,10 +91,14 @@ function sendEmail(subject, message){
 async function run() {
   // config browser
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
   });
   // Log Into University Google Account
   const pageg = await browser.newPage();
+  // Foceing use agent so headless does not load in mobile
+  // Windows 10 will be sown as device in Google Activity
+  // see: https://github.com/GoogleChrome/puppeteer/issues/1766
+  await pageg.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
   await pageg.goto('https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin', {waitUntil: 'networkidle2'});
   // DOM element selectors
   const USERNAME_SELECTOR = '#identifierId';
@@ -104,7 +108,7 @@ async function run() {
   await pageg.keyboard.press('Tab');  
   await pageg.keyboard.press('Tab');
   await pageg.keyboard.press('Enter');
-  await pageg.waitFor(10000)
+  await pageg.waitFor(1000)
   await pageg.keyboard.type(CREDS.gPass);
   await pageg.keyboard.press('Tab');
   await pageg.keyboard.press('Enter');
@@ -112,17 +116,20 @@ async function run() {
   // In a new page log into NU ERP
   const page = await browser.newPage();
 
+  // see: https://github.com/GoogleChrome/puppeteer/issues/1766
+  await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
   // handle popup messages
   page.on('dialog', async dialog => {
     message_for_email = message_for_email + "<p>Message in Popup: " + dialog.message() + "</p>"
+    await page.waitFor(1000);
     dialog.accept(); // click ok on alert
   });
   // log into NU ERP
   // wait for good amount of time to ensure that page gets loaded
-  await page.waitFor(10*1000);
+  await page.waitFor(5*1000);
   await page.goto('https://nucleus.niituniversity.in/', {waitUntil: 'networkidle2'});
   await page.click('#lnklogingoogle', {waitUntil: 'networkidle2'});
-  await page.waitFor(10*1000);
+  await page.waitFor(5*1000);
   await page.goto('https://nucleus.niituniversity.in/WebApp/StudParentDashBoard/DailyDiary.aspx', {waitUntil: 'networkidle2'});
 
   // generate random in and out time in ranges
@@ -149,6 +156,8 @@ async function run() {
 
   // send Email
   sendEmail("dd-automate - Daily Diary Email", message_for_email)
+  // now close browser
+  await browser.close();
 }
 
 // ================================
