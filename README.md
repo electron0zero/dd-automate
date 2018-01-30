@@ -25,8 +25,16 @@ module.exports = {
 `node index.js`
 you can change `headless: false` to see what GUI 
 
-### Refer these for setup and other things
+### Deplyment
+
+#### Heroku
+1. do usual heroku things
+2. add this [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) to install required dependcies for puppeteer
+3. configure cron to run it daily at a time
+
+### Refer these for setup and other thing
 http://www.spacjer.com/blog/2014/02/10/defining-node-dot-js-task-for-heroku-scheduler/
 https://github.com/rspacjer/notyfication-sender
 https://sendgrid.com/docs/Classroom/Troubleshooting/Account_Administration/heroku_users_find_your_sendgrid_credentials.html
-
+https://timleland.com/headless-chrome-on-heroku/
+https://github.com/jontewks/puppeteer-heroku-buildpack

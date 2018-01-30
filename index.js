@@ -91,8 +91,10 @@ function sendEmail(subject, message){
 async function run() {
   console.log("Started run() at: " + new Date().toString())
   // config browser
+  // sandbox args is not a good idea from security point, but required to run on Heroku
   const browser = await puppeteer.launch({
     headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   // Log Into University Google Account
   const pageg = await browser.newPage();
