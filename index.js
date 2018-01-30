@@ -2,6 +2,11 @@ var time = require('time');
 const puppeteer = require('puppeteer');
 const CREDS = require('./creds');
 
+var sendgrid  = require('sendgrid')(
+  process.env.SENDGRID_USERNAME,
+  process.env.SENDGRID_PASSWORD
+);
+
 // Text for weekend
 weekend_text = "Weekend - Leave at Office"
 
