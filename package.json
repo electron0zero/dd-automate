@@ -6,6 +6,9 @@
   "author": "electron0zero",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "8.9.3"
+  },
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "puppeteer": "^1.0.0",
