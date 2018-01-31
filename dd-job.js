@@ -92,7 +92,7 @@ async function run() {
   // config browser
   // sandbox args is not a good idea from security point, but required to run on Heroku
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   // Log Into University Google Account
@@ -146,6 +146,7 @@ async function run() {
   message_for_email = message_for_email + "<p>In Time: " + in_hour + ":" + in_min + "</p>" 
   message_for_email = message_for_email + "<p>Out Time: " + out_hour + ":" + out_min + "</p>"
 
+  // await page.screenshot({path: 'nu.png'});
   // fill in the in and out hours
   await page.select('select[name="ctl00$ContentPlaceHolder1$Timeinhr"]', in_hour);
   await page.select('select[name="ctl00$ContentPlaceHolder1$Timeinmin"]', in_min);
