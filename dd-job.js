@@ -101,6 +101,7 @@ async function run() {
   // Windows 10 will be sown as device in Google Activity
   // see: https://github.com/GoogleChrome/puppeteer/issues/1766
   await pageg.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
+  await pageg.setViewport({width:1366,height:768});
   await pageg.goto('https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin', {waitUntil: 'networkidle2'});
   // DOM element selectors
   const USERNAME_SELECTOR = '#identifierId';
@@ -120,6 +121,7 @@ async function run() {
 
   // see: https://github.com/GoogleChrome/puppeteer/issues/1766
   await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
+  await page.setViewport({width:1366,height:768});
   // handle popup messages
   page.on('dialog', async dialog => {
     message_for_email = message_for_email + "<p>Message in Popup: " + dialog.message() + "</p>"

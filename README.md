@@ -17,6 +17,7 @@ Now create creds in you [heroku project using config](https://devcenter.heroku.c
 - change <university-email> and <password> with your university gmail account creds.
 - change <your-api-key> with sendgrid api key
 
+for local developemt just export/set these env vars.
 
 ### How to run
 - Install stuff with - `npm install`
