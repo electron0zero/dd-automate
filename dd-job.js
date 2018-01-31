@@ -19,7 +19,7 @@ week_texts = [
 "Fixed a consumer facing bug",
 "Found and fixed a bug",
 "Discussed new feature and worked on it",
-"Worked on onging feature"]
+"Worked on ongoing feature"]
 
 // message for email we send when we reach at the end of run function
 message_for_email = "<h2>dd-automate email</h2><br>"
@@ -92,7 +92,7 @@ async function run() {
   // config browser
   // sandbox args is not a good idea from security point, but required to run on Heroku
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   // Log Into University Google Account
@@ -119,15 +119,17 @@ async function run() {
   // In a new page log into NU ERP
   const page = await browser.newPage();
 
+  // add listener handle popup messages with this
+  page.on('dialog', dialog => {
+    message_for_email = message_for_email + "<p>Message in Popup: " + dialog.message() + "</p>"
+    // console.log(dialog.message())
+    dialog.accept(); // click ok on alert
+  });
+
+
   // see: https://github.com/GoogleChrome/puppeteer/issues/1766
   await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
   await page.setViewport({width:1366,height:768});
-  // handle popup messages
-  page.on('dialog', async dialog => {
-    message_for_email = message_for_email + "<p>Message in Popup: " + dialog.message() + "</p>"
-    await page.waitFor(1000);
-    dialog.accept(); // click ok on alert
-  });
   // log into NU ERP
   // wait for good amount of time to ensure that page gets loaded
   await page.waitFor(5*1000);
@@ -158,8 +160,10 @@ async function run() {
   // click the submit buttom
   await page.click('#ctl00_ContentPlaceHolder1_btnSubmit', {waitUntil: 'networkidle2'});
 
+  console.log(message_for_email)  
+
   // send Email
-  sendEmail("dd-automate - Daily Diary Email", message_for_email)
+  // sendEmail("dd-automate - Daily Diary Email", message_for_email)
   // now close browser
   await browser.close();
   console.log("run() Finished at: " + new Date().toString())
