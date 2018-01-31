@@ -41,7 +41,7 @@ module.exports = {
 
 - `heroku create dd-automate`
 - `heroku buildpacks:add https://github.com/jontewks/puppeteer-heroku-buildpack`
-- `heroku config:add BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs.git`
+- `heroku buildpacks:set heroku/nodejs`
 - `heroku addons:add scheduler`
 - `git push heroku master`
 
