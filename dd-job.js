@@ -1,11 +1,10 @@
 var time = require('time');
 const puppeteer = require('puppeteer');
-const CREDS = require('./creds');
 const sgMail = require('@sendgrid/mail');
 
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-sgMail.setApiKey(CREDS.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Text for weekend
 weekend_text = "Weekend - Leave at Office"
@@ -107,12 +106,12 @@ async function run() {
   const USERNAME_SELECTOR = '#identifierId';
   const PASSWORD_SELECTOR = '#password';
   await pageg.click(USERNAME_SELECTOR);
-  await pageg.keyboard.type(CREDS.gEmail);
+  await pageg.keyboard.type(process.env.EMAIL);
   await pageg.keyboard.press('Tab');  
   await pageg.keyboard.press('Tab');
   await pageg.keyboard.press('Enter');
   await pageg.waitFor(1000)
-  await pageg.keyboard.type(CREDS.gPass);
+  await pageg.keyboard.type(process.env.PASS);
   await pageg.keyboard.press('Tab');
   await pageg.keyboard.press('Enter');
 
