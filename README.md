@@ -9,8 +9,11 @@ Get your SendGrid API key from [SendGrid](https://app.sendgrid.com/settings/api_
 
 Now create creds in root of project
 
+
 1. make a file `creds.js`
+
 2. copy paste following js in it
+
 ```js
 module.exports = {
     gEmail: '<username>',
@@ -22,11 +25,13 @@ module.exports = {
 4. change <your-api-key> with sendgrid api key
 
 ### How to run
-`node index.js`
-you can change `headless: false` to see what GUI 
+- Install stuff with - `npm install`
+- Job `npm run job` (you can change `headless: false` to see GUI)
 
+- Dummy Server - `npm start`
 ### Deplyment
 
+0. have a hello word node app so heroku can treat this a valid node app
 #### Heroku
 1. do usual heroku things, login, project create etc.
 2. add this [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) to install required dependcies for puppeteer
@@ -40,7 +45,11 @@ you can change `headless: false` to see what GUI
 
 ### Refer these for setup and other thing
 http://www.spacjer.com/blog/2014/02/10/defining-node-dot-js-task-for-heroku-scheduler/
+
 https://github.com/rspacjer/notyfication-sender
+
 https://sendgrid.com/docs/Classroom/Troubleshooting/Account_Administration/heroku_users_find_your_sendgrid_credentials.html
+
 https://timleland.com/headless-chrome-on-heroku/
+
 https://github.com/jontewks/puppeteer-heroku-buildpack

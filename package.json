@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Automate Daily Diary for IP",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "job": "node dd-job.js"
+  },
   "author": "electron0zero",
   "license": "MIT",
   "private": true,
