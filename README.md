@@ -43,6 +43,8 @@ run using [heroku local command](https://devcenter.heroku.com/articles/heroku-lo
 - `heroku addons:add scheduler`
 - `git push heroku master`
 
+Go to Heroku Scheduler App for the app and config scheduler and type our job
+
 ### Refer these for setup and other thing
 http://www.spacjer.com/blog/2014/02/10/defining-node-dot-js-task-for-heroku-scheduler/
 
