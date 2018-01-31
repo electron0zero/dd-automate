@@ -35,11 +35,13 @@ module.exports = {
 #### Heroku
 1. do usual heroku things, login, project create etc.
 2. add this [buildpack](https://github.com/jontewks/puppeteer-heroku-buildpack) to install required dependcies for puppeteer
+3. force it as nodejs app using nodejs buildpack
 3. add credit card(if not added) so we can add scheduler addon
 3. configure cron to run it daily at a time
 
 - `heroku create dd-automate`
 - `heroku buildpacks:add https://github.com/jontewks/puppeteer-heroku-buildpack`
+- `heroku config:add BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-nodejs.git`
 - `heroku addons:add scheduler`
 - `git push heroku master`
 
